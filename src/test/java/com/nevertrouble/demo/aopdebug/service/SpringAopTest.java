@@ -28,15 +28,14 @@ class SpringAopTest {
     }
 
     // 此分支 application.properties 中的
-    // spring.aop.proxy-target-class=false
-    // 即，实现了接口的 bean 在 aop 下为 JDK 代理
-    // 无接口的 bean 在 aop 下为 CGlib 代理
+    // spring.aop.proxy-target-class=true
+    // 即，aop 下全走 CGlib 代理
 
-    // 断点打在 ServiceAspect 中 point.proceed() 处，运行测试，即可查看两者区别
+    // 断点打在 ServiceAspect 中 point.proceed() 处，运行测试，即可查看到两者都为 CGlib 代理类
 
     // 注入接口类型
     @Autowired
-    private PrintService printService; // 此情况下，注入的是 JDK Proxy 代理类
+    private PrintService printService; // 此情况下，注入的是 CGlib 代理类
 
     // 注入无接口的类
     @Autowired
